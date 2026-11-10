@@ -126,3 +126,7 @@ details.more p,details.more li{font-size:15px}
 .stuckbtn.on{background:var(--acc2);color:#fff;border-color:var(--acc2)}
 .tools{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:24px;background:var(--card)}
 .tools h2{font-size:17px;margin:0 0 6px}
+.scene{border-radius:12px;padding:14px 18px;margin:12px 0;background:linear-gradient(180deg,var(--chip),transparent);border:1px solid var(--line)}
+.scene .tag{display:inline-block;font-size:12px;padding:1px 10px;border-radius:10px;background:var(--acc2);color:#fff;margin-bottom:6px}
+.scene p{margin:6px 0}
+ol.steps .code{margin:6px 0}
