@@ -9,6 +9,23 @@ window.CONTENT.ch2={
  "osbar": true,
  "sections": [
   {
+   "id": "sScene",
+   "nav": "들어가며: 엑셀을 연 순간",
+   "title": "들어가며: 엑셀을 연 순간",
+   "page": "자료 장면 · 이 장 전체가 답하려는 물음",
+   "blocks": [
+    {
+     "type": "scene",
+     "html": "<div class=\"scene\"><div class=\"tag\">자료 장면</div>\n<p>지수(가명)는 심리학과 대학원 첫 학기예요. 지도교수가 메일을 보냈어요. 「지난 학기 대학생 설문 자료야. 남녀 맥박이 다른지부터 한번 봐.」</p>\n<p>엑셀을 열어 보니 237줄이에요. 열은 성별, 손 크기, 흡연, 운동, 맥박, 키…. 위아래로 아무리 훑어봐도 남녀가 다른지 감이 오지 않아요. 군데군데 빈칸도 있어요.</p>\n<p class=\"note\">책 69쪽 첫 문장도 같은 말을 해요: 숫자들을 훑어봄으로써 자료의 패턴이나 중심, 퍼짐을 알아내는 것은 결코 쉬운 일이 아니다. 이 장의 R 도구는 이 237줄을 다룰 손을 마련하는 일이에요. (장면은 Aside가 지은 이야기, 자료는 R의 MASS::survey와 같은 구성)</p></div>"
+    },
+    {
+     "type": "think",
+     "html": "<div class=\"think\" data-id=\"scene-shape\">\n<h3>이 237줄을 R로 옮기면 어떤 모양이 될까?</h3>\n<p class=\"note\">지금은 낱말을 몰라도 괜찮아요. 「표」, 「줄」, 「한 칸」 같은 내 말로 적어 보세요. 2장을 다 읽고 다시 와서 고쳐 써도 돼요.</p>\n<textarea placeholder=\"예: 엑셀처럼 표가 될 것 같은데…\"></textarea>\n<div class=\"row\"><button class=\"reveal\" disabled>점검 기준 보기</button><span class=\"note\">적은 답은 이 브라우저에만 저장</span></div>\n<div class=\"crit\">\n<p class=\"note\">2장을 읽은 뒤 내 답에 이런 생각이 들어 있나요?</p>\n<label class=\"c\"><input type=\"checkbox\"> <span><b>전체는 데이터 프레임</b>: 행은 학생 한 명, 열은 변수 하나 (5번 칸).</span></label>\n<label class=\"c\"><input type=\"checkbox\"> <span><b>맥박 한 열은 벡터</b>: 237명의 맥박이 한 줄로 늘어선 것 (1번 칸).</span></label>\n<label class=\"c\"><input type=\"checkbox\"> <span><b>성별은 범주</b>: 숫자처럼 더하거나 평균 낼 수 없는 칸 이름표 (3번 요인 칸).</span></label>\n<label class=\"c\"><input type=\"checkbox\"> <span><b>남녀를 가르는 것은 조건으로 골라내기</b>: <code>==</code>로 묻고 TRUE인 자리만 꺼냄 (6번 칸).</span></label>\n<div class=\"after\"><b>네 가지가 모두 들어 있다면</b> 2장의 뼈대를 잡은 거예요. 아래 「장면 풀기」 칸에서 실제 명령으로 이어 봐요. <span class=\"note\">(설명: Aside, 작성자 확인 전)</span></div>\n</div></div>"
+    }
+   ],
+   "mine": "내 말로 한 줄: 「지수가 막힌 이유는 ___ 」"
+  },
+  {
    "id": "sSet",
    "nav": "준비. R과 RStudio 설치",
    "title": "준비. R과 RStudio 설치하기",
@@ -309,6 +326,31 @@ window.CONTENT.ch2={
     }
    ],
    "mine": "내 말로 한 줄: 「바깥 파일을 불러온다는 것은 ___ 」"
+  },
+  {
+   "id": "sSolve",
+   "nav": "장면 풀기: 남녀 맥박",
+   "title": "장면 풀기: 지수의 물음으로 돌아가기",
+   "page": "2장의 칸을 이어 붙이면 · 실제 결과 숫자는 3바퀴에 내 R에서",
+   "blocks": [
+    {
+     "type": "scene",
+     "html": "<div class=\"scene\"><div class=\"tag\">장면 풀기</div>\n<p>지도교수의 물음은 「남녀 맥박이 다른가」였어요. 「다른가」를 통계로 판단하는 법은 11장(독립표본 t검정)에서 배워요. 2장 도구로는 그 앞까지, <b>남녀 각각의 평균 맥박</b>을 구할 수 있어요.</p></div>"
+    },
+    {
+     "type": "html",
+     "html": "<ol class=\"steps\">\n<li><b>불러오기 (8번 칸)</b><span class=\"code\">library(MASS)        # survey 자료가 들어 있는 패키지 (7번 칸)\ndata(survey)          # 엑셀 대신 R에 들어 있는 같은 구성의 자료</span><span class=\"note\">내 엑셀 파일이라면: <code>survey &lt;- read.csv(\"파일.csv\")</code></span></li>\n<li><b>표의 모양 보기 (5번 칸)</b><span class=\"code\">dim(survey)           # 몇 행 몇 열인가\nhead(survey)          # 첫 여섯 줄</span></li>\n<li><b>여학생 맥박만 골라내기 (6번 칸)</b><span class=\"code\">female &lt;- survey$Pulse[survey$Sex == \"Female\"]</span></li>\n<li><b>평균 내기 (0번 칸)</b><span class=\"code\">mean(female)                 # 빈칸이 있으면 NA가 나와요\nmean(female, na.rm = TRUE)   # 빈칸을 빼고 계산하라는 argument</span></li>\n<li><b>남학생도 같은 방법으로</b> <code>Sex == \"Male\"</code></li>\n</ol>"
+    },
+    {
+     "type": "trap",
+     "html": "<div class=\"trap\"><b>빈칸(NA)의 함정:</b> 실제 자료에는 거의 늘 빈칸이 있어요. R은 빈칸을 <code>NA</code>(값 없음)로 적고, 빈칸이 하나라도 있으면 <code>mean()</code>은 「모른다」는 뜻으로 <code>NA</code>를 돌려줘요. <code>na.rm = TRUE</code>는 「빈칸을 빼고 계산해」라는 주문(argument)이에요. 몇 명이 빠졌는지는 <code>sum(is.na(female))</code>로 세어 함께 적는 습관이 좋아요. 이건 2장 본문에는 없는 내용이라 Aside가 더한 것이에요.</div>"
+    },
+    {
+     "type": "think",
+     "html": "<div class=\"think\" data-id=\"solve-why\">\n<h3>두 평균이 다르면 「남녀 맥박이 다르다」고 말해도 될까?</h3>\n<p class=\"note\">짐작으로 적어 보세요. 이 물음은 7장(표집이론)부터 11장까지 책 전체가 답해요.</p>\n<textarea placeholder=\"예: 숫자가 조금이라도 다르면…\"></textarea>\n<div class=\"row\"><button class=\"reveal\" disabled>점검 기준 보기</button><span class=\"note\">적은 답은 이 브라우저에만 저장</span></div>\n<div class=\"crit\">\n<label class=\"c\"><input type=\"checkbox\"> <span><b>표본이다</b>: 237명은 모든 대학생이 아니라 일부라, 다시 뽑으면 평균이 달라질 수 있다 (1장, 7장).</span></label>\n<label class=\"c\"><input type=\"checkbox\"> <span><b>우연히 생길 만한 차이인지</b> 따져야 한다 (8~9장 가설검정, p값).</span></label>\n<label class=\"c\"><input type=\"checkbox\"> <span><b>차이의 크기</b>도 따로 본다 (9장 효과크기, 신뢰구간).</span></label>\n<div class=\"after\">그래서 이 책의 2부가 통째로 이 물음에 답하는 길이에요. 지금은 「평균이 다르다 ≠ 다르다고 말할 수 있다」만 가져가면 충분해요. <span class=\"note\">(설명: Aside, 작성자 확인 전)</span></div>\n</div></div>"
+    }
+   ],
+   "mine": "내 말로 한 줄: 「지수에게 지금 해 줄 수 있는 말은 ___ 」"
   },
   {
    "id": "s8",
